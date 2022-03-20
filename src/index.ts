@@ -1,8 +1,14 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
+import dotenv from 'dotenv';
 
 import todoRoutes from './todo/routes';
+import userRoutes from './user/routes';
 import { connectToDb } from './service/db';
+
 connectToDb();
+
+// get config vars
+dotenv.config();
 
 // Boot express
 const app: Application = express();
@@ -17,6 +23,8 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
 });
 
 app.use('/todo', todoRoutes);
+app.use('/user', userRoutes);
+
 
 // Start server
 app.listen(port, () => console.log(`Server is listening on port ${port}!`));

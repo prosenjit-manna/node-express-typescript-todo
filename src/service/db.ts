@@ -3,7 +3,8 @@ import { MongoClient } from 'mongodb';
 
 
 const dbService = {
-  todo: null as unknown as any
+  todo: null as unknown as any,
+  user: null as unknown as any
 };
 
 export async function connectToDb () {
@@ -18,6 +19,9 @@ export async function connectToDb () {
 
   const todo = db.collection('todo-list');
   dbService.todo = todo as unknown as any || null;
+
+  const user = db.collection('user-list');
+  dbService.user = user as unknown as any || null;
 }
 
 export default dbService;
