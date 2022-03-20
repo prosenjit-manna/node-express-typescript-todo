@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+    # node-api:
+        # build: 
+        #   context: ./
+        # ports:
+        #     - 80:80
+        #     - 443:443
+        # volumes:
+        #     - "./:/var/www/html"
+
+
+    todo-db:
+      ports:
+         - 27017:27017
+
+      image: mongo
+      restart: always
+      environment:
+        MONGO_INITDB_ROOT_USERNAME: root
+        MONGO_INITDB_ROOT_PASSWORD: testpassword
+
+    # mongodb://root:testpassword@localhost:27017    
+
+volumes:
+    db-volume: 
