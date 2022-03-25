@@ -1,18 +1,24 @@
-import { ObjectId } from 'mongodb';
-import dbService from './db';
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
+
 
 const todoService = {
   getList: () => {
-    return dbService.todo.find().toArray();
+    return prisma.todo.findMany();
   },
   create: async (data: any) => {
-    return dbService.todo.insertOne(data);
+    return prisma.todo.create(data);
   },
   update: async (data: any, id: string) => {
-    return dbService.todo.updateOne({ _id: new ObjectId(id) }, { $set: data });
+    return prisma.todo.update(data);
   },
   delete: async (id: string) => {
-    return dbService.todo.remove({ _id: new ObjectId(id) });
+    return prisma.todo.delete({
+      where: {
+        id
+      }
+    })
   },
   findOne: async (id: string) => {
     const query = {
